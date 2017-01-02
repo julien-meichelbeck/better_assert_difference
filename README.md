@@ -1,10 +1,8 @@
-# BetterAssertDifference
 
-```ruby
-# assert_difference([Foo.where(bar: true), 'Foo.where(bar: true).count', -> { Foo.where(bar: true).count }])
-# assert_difference(Foo.where(bar: true))
-# assert_difference(Foo.where(bar: true) => 2, Foo.where(bar: false) => 4)
-```
+# BetterAssertDifference
+`assert_difference`, but better.
+
+![](https://api.travis-ci.org/julien-meichelbeck/better_assert_difference.svg?branch=master)
 
 ## Installation
 
@@ -27,6 +25,13 @@ Or install it yourself as:
 ```ruby
   Minitest::Test.include BetterAssertDifference
 ```
+
+```ruby
+  assert_difference([Foo.where(bar: true), 'Foo.where(bar: true).count', -> { Foo.where(bar: true).count }])
+  assert_difference(Foo.where(bar: true))
+  assert_difference(Foo.where(bar: true) => 2, Foo.where(bar: false) => 4)
+```
+
 
 ## Contributing
 
