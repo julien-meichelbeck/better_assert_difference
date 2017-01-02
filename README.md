@@ -22,14 +22,37 @@ Or install it yourself as:
 
 ## Usage
 
+Add in your `test_helper.rb`:
 ```ruby
   Minitest::Test.include BetterAssertDifference
 ```
 
+#### Backward compatible
+You can use `assert_difference` just as usual with string expressions or Proc expressions:
 ```ruby
-  assert_difference([Foo.where(bar: true), 'Foo.where(bar: true).count', -> { Foo.where(bar: true).count }])
-  assert_difference(Foo.where(bar: true))
-  assert_difference(Foo.where(bar: true) => 2, Foo.where(bar: false) => 4)
+  assert_difference('Foo.bar.count', 3) do
+    # block omitted
+  end
+  
+  assert_difference(-> { Foo.bar.count }, 2) do
+    # block omitted
+  end
+```
+
+#### Implicit call of `count` on ActiveRecord relations, arrays, etc.
+Most of the time you'll want to `count` objects, don't need to use string expression or blocks, just pass an `ActiveRecord_Relation` object or an array.
+```ruby
+  assert_difference(Foo.where(bar: true)) do
+    # block omitted
+  end
+```
+
+#### Multiple differences in one call
+Specify an expected difference for each expression:
+```ruby
+  assert_difference(Foo.where(bar: true) => 3, Foo.where(baz: false) => 5) do
+    # block omitted
+  end
 ```
 
 
