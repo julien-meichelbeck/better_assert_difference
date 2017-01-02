@@ -2,7 +2,7 @@
 # BetterAssertDifference
 `assert_difference`, but better.
 
-![](https://api.travis-ci.org/julien-meichelbeck/better_assert_difference.svg?branch=master)
+![https://travis-ci.org/julien-meichelbeck/better_assert_difference](https://api.travis-ci.org/julien-meichelbeck/better_assert_difference.svg?branch=master)
 
 ## Installation
 
