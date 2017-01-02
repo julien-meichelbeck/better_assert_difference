@@ -1,4 +1,4 @@
-require "better_assert_difference/version"
+require 'better_assert_difference/version'
 
 module BetterAssertDifference
   DEFAULT_DIFF = 1
