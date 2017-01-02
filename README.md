@@ -28,7 +28,7 @@ Add in your `test_helper.rb`:
 ```
 
 #### Backward compatible
-You can use `assert_difference` just as usual with string expressions or Proc expressions:
+You can use `assert_difference` just as usual with string expressions or procs:
 ```ruby
   assert_difference('Foo.bar.count', 3) do
     # block omitted
@@ -40,7 +40,7 @@ You can use `assert_difference` just as usual with string expressions or Proc ex
 ```
 
 #### Implicit call of `count` on ActiveRecord relations, arrays, etc.
-Most of the time you'll want to `count` objects, don't need to use string expression or blocks, just pass an `ActiveRecord_Relation` object or an array.
+Most of the time you'll want to `count` objects. You won't have to use string expressions or procs, just pass an `ActiveRecord_Relation` object or an array.
 ```ruby
   assert_difference(Foo.where(bar: true)) do
     # block omitted
