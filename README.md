@@ -22,9 +22,17 @@ Or install it yourself as:
 
 ## Usage
 
-Add in your `test_helper.rb`:
+Include BetterAssertDifference in your tests:
+
 ```ruby
+  # For Rails
+  ActiveSupport::TestCase.include BetterAssertDifference
+  # For MiniTest
   Minitest::Test.include BetterAssertDifference
+  # For RSpec
+  RSpec.configure do |config|
+    config.include AssertDifference
+  end
 ```
 
 #### Backward compatible
