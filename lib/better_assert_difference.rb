@@ -24,11 +24,17 @@ module BetterAssertDifference
       end
     before = block_to_diff.keys.map(&:call)
     retval = yield
-    block_to_diff.each_with_index do |(exp, diff), i|
+    after = block_to_diff.keys.map(&:call)
+
+    errors = []
+    before.zip(after, expression_to_diff) do |before_value, after_value, (exp, diff)|
+      next if before_value + diff == after_value
       error  = "#{exp.inspect} didn't change by #{diff}"
       error  = "#{message}.\n#{error}" if message
-      assert_equal(before[i] + diff, exp.call, error)
+      errors << error
     end
+    fail errors.join("\n") if errors.any?
+
     retval
   end
 end
