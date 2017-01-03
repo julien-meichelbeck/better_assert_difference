@@ -64,7 +64,7 @@ Specify an expected difference for each expression:
 ```
 
 #### Better error message
-assert_difference will list all the differences assertions that have failed, not just the first one.
+assert_difference will list all the assertions that have failed, not just the first one.
 ```console
   Test failure:
   @items.select(&:nil?).count didn't change by 2
