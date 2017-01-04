@@ -69,9 +69,9 @@ Specify an expected difference for each expression:
 #### Better error message
 assert_difference will list all the assertions that have failed, not just the first one.
 ```console
-  Test failure:
-  @items.select(&:nil?).count didn't change by 2 (before: 0, after: 1)
-  @items.count didn't change by 3 (before: 2, after: 5)
+  2 assertions failed:
+  [0] @items.select(&:nil?).count didn't change by 2 {before: 0, after: 1}
+  [1] @items.count didn't change by 3 {before: 2, after: 5}
 ```
 ## Contributing
 
