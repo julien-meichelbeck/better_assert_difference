@@ -41,14 +41,15 @@ You can use `assert_difference` just as usual with string expressions or procs:
   assert_difference('Foo.bar.count', 3) do
     # block omitted
   end
-  
+
   assert_difference(-> { Foo.bar.count }, 2) do
     # block omitted
   end
 ```
 
-#### Implicit call of `count` on ActiveRecord relations, arrays, etc.
-Most of the time you'll want to `count` objects. You won't have to use string expressions or procs, just pass an `ActiveRecord_Relation` object or an array.
+#### Implicit call of `count` on ActiveRecord relations
+Most of the time you'll want to execute `count` on ActiveRecord::Relation objects, this call is now implicit and you won't have to
+use a string expression or a proc.
 ```ruby
   assert_difference(Foo.where(bar: true)) do
     # block omitted

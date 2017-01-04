@@ -1,4 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'active_record/base'
+require 'dummy/fruit'
 require 'better_assert_difference'
 require 'pry'
 require 'minitest/autorun'
@@ -8,10 +11,13 @@ module BetterAssertDifference::TestHelpers
     begin
       yield
       fail "should fail with message : #{expected_message}"
-    rescue StandardError => exception
-      assert exception.is_a?(RuntimeError)
+    rescue RuntimeError => exception
       assert_equal expected_message[0..-2], exception.message
     end
+  end
+
+  def teardown
+    ActiveRecord::Base.reset_count
   end
 end
 

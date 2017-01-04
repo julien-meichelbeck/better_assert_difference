@@ -2,20 +2,22 @@ require 'better_assert_difference/version'
 
 module BetterAssertDifference
   DEFAULT_DIFF = 1
+  ACTIVE_RECORD_ENABLED = !!defined?(ActiveRecord::Base)
 
   def assert_difference(expression, difference = DEFAULT_DIFF, message = nil, &block)
     expression_to_diff =
       if expression.is_a?(Hash)
         expression
       else
-        Array(expression).each_with_object({}) { |exp, expression_hash| expression_hash[exp] = DEFAULT_DIFF }
+        Array(expression).each_with_object({}) { |exp, expression_hash| expression_hash[exp] = difference }
       end
+
     block_to_diff =
       expression_to_diff.each_with_object({}) do |(exp, diff), expression_hash|
         key =
           if exp.respond_to?(:call)
             exp
-          elsif exp.respond_to?(:count) && !exp.is_a?(String)
+          elsif ACTIVE_RECORD_ENABLED && active_record?(exp)
             -> { exp.count }
           else
             -> { eval(exp, block.binding) }
@@ -29,7 +31,7 @@ module BetterAssertDifference
     errors = []
     before.zip(after, expression_to_diff) do |before_value, after_value, (exp, diff)|
       next if before_value + diff == after_value
-      error  = "#{exp.inspect} didn't change by #{diff}"
+      error  = "#{exp.inspect} didn't change by #{diff} (before: #{before_value}, after: #{after_value})"
       error  = "#{message}.\n#{error}" if message
       errors << error
     end
@@ -37,4 +39,11 @@ module BetterAssertDifference
 
     retval
   end
+
+  private
+
+    def active_record?(expression)
+      expression.respond_to?(:ancestors) &&
+        expression.ancestors.map(&:to_s).include?('ActiveRecord::Base')
+    end
 end
