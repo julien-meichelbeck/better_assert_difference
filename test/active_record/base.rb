@@ -1,18 +1,22 @@
 module ActiveRecord
   class Base
-    @@counter = 0
+    @@items = []
 
     def self.create
-      @@counter += 1
+      @@items << 1
       true
     end
 
+    def self.all
+      @@items
+    end
+
     def self.count
-      @@counter
+      @@items.count
     end
 
     def self.reset_count
-      @@counter = 0
+      @@items = []
     end
   end
 end

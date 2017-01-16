@@ -5,11 +5,12 @@ module BetterAssertDifference
   ACTIVE_RECORD_ENABLED = !!defined?(ActiveRecord::Base)
 
   def assert_difference(expression, difference = DEFAULT_DIFF, message = nil, &block)
+    expressions = active_record?(expression) ? [expression] : expression
     expression_to_diff =
-      if expression.is_a?(Hash)
-        expression
+      if expressions.is_a?(Hash)
+        expressions
       else
-        Array(expression).each_with_object({}) { |exp, expression_hash| expression_hash[exp] = difference }
+        Array(expressions).each_with_object({}) { |exp, expression_hash| expression_hash[exp] = difference }
       end
 
     block_to_diff =
@@ -38,7 +39,7 @@ module BetterAssertDifference
     end
     if errors.any?
       errors.unshift "#{errors.size} assertion#{errors.length > 1 ? 's' : ''} failed:"
-      fail errors.join("\n")
+      raise MiniTest::Assertion, errors.join("\n")
     end
 
     retval

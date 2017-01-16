@@ -22,8 +22,12 @@ class BetterAssertDifferenceTest < Minitest::Test
     end
   end
 
-  def test_implicit_count_on_active_record_relation
+  def test_implicit_count_on_active_record_class
     assert_difference(Fruit, 1) { Fruit.create }
+  end
+
+  def test_implicit_count_on_active_record_relation
+    assert_difference(Fruit.all, 1) { Fruit.create }
   end
 
   def test_error_message_on_active_record_relation

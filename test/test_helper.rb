@@ -11,7 +11,7 @@ module BetterAssertDifference::TestHelpers
     begin
       yield
       fail "should fail with message : #{expected_message}"
-    rescue RuntimeError => exception
+    rescue MiniTest::Assertion => exception
       assert_equal expected_message[0..-2], exception.message
     end
   end
