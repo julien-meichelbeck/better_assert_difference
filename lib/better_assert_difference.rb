@@ -1,4 +1,5 @@
 require 'better_assert_difference/version'
+require 'better_assert_difference/exceptions/difference_exception'
 
 module BetterAssertDifference
   DEFAULT_DIFF = 1
@@ -15,6 +16,7 @@ module BetterAssertDifference
 
     block_to_diff =
       expression_to_diff.each_with_object({}) do |(exp, diff), expression_hash|
+        raise DifferenceException.new(diff) unless diff.is_a?(Integer)
         key =
           if exp.respond_to?(:call)
             exp

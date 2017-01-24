@@ -74,4 +74,30 @@ class BetterAssertDifferenceTest < Minitest::Test
       assert_difference('@items.count' => 3) { }
     end
   end
+
+  def test_bad_difference_format
+    error_message = <<~FAILURE
+
+      Difference is a Fruit, it must be an integer.
+      If you want to assert the difference of multiple expressions wrap them in an array:
+      assert_difference [Foo, Bar], 1 { }
+
+    FAILURE
+    assert_failure_with_message(error_message, DifferenceException) do
+      assert_difference('@items.count', Fruit) { }
+    end
+  end
+
+  def test_bad_difference_format_as_hash
+    error_message = <<~FAILURE
+
+      Difference is a Fruit, it must be an integer.
+      If you want to assert the difference of multiple expressions wrap them in an array:
+      assert_difference [Foo, Bar], 1 { }
+
+    FAILURE
+    assert_failure_with_message(error_message, DifferenceException) do
+      assert_difference(Fruit => Fruit) { }
+    end
+  end
 end

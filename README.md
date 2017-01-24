@@ -45,6 +45,10 @@ You can use `assert_difference` just as usual with string expressions or procs:
   assert_difference(-> { Foo.bar.count }, 2) do
     # block omitted
   end
+
+  assert_difference([Foo, Bar, Baz], 4) do
+    # block omitted
+  end
 ```
 
 #### Implicit call of `count` on ActiveRecord relations
