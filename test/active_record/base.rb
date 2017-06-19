@@ -18,5 +18,9 @@ module ActiveRecord
     def self.reset_count
       @@items = []
     end
+
+    def self.reload
+      self
+    end
   end
 end

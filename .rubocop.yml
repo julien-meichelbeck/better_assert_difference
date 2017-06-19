@@ -1,0 +1,126 @@
+AllCops:
+  TargetRubyVersion: 2.3
+Rails:
+  Enabled: true
+
+Metrics/ParameterLists:
+  Max: 5
+  CountKeywordArgs: false
+Style/MutableConstant:
+  Enabled: false
+Rails/ActionFilter:
+  Enabled: true
+Rails/Date:
+  Enabled: true
+Rails/FindBy:
+  Enabled: true
+Rails/FindEach:
+  Enabled: true
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/Output:
+  Enabled: true
+Rails/ReadWriteAttribute:
+  Enabled: true
+Rails/ScopeArgs:
+  Enabled: true
+Rails/TimeZone:
+  Enabled: true
+Metrics/LineLength:
+  Max: 120
+Metrics/AbcSize:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/SignalException:
+  Enabled: false
+Style/OptionHash:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: true
+Performance/Casecmp:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Style/RaiseArgs:
+  EnforcedStyle: exploded
+Doctolib/ClickThenAssert:
+  Enabled: true
+  Include:
+    - 'test/**/*_test.rb'
+  Severity: warning
+
+
+# Generated configuration
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19
+  UseHashRocketsWithSymbolValues: false
+Style/MethodDefParentheses:
+  Enabled: true
+  EnforcedStyle: require_parentheses
+Style/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+Style/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
+Style/AlignParameters:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Style/BlockDelimiters:
+  Enabled: true
+  EnforcedStyle: line_count_based
+Style/AndOr:
+  Enabled: true
+Style/DotPosition:
+  Enabled: true
+  EnforcedStyle: leading
+Style/EmptyLinesAroundClassBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+Style/EmptyLinesAroundModuleBody:
+  Enabled: true
+  EnforcedStyle: no_empty_lines
+Style/NumericPredicate:
+  Enabled: true
+  EnforcedStyle: comparison
+Style/EvenOdd:
+  Enabled: false
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    inject: reduce
+    detect: find
+    find_all: select
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: true
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: compact
+Style/CommandLiteral:
+  Enabled: true
+  EnforcedStyle: percent_x
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+Style/SpaceInsideBlockBraces:
+  EnforcedStyle: space

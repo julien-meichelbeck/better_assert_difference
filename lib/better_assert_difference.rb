@@ -3,7 +3,7 @@ require 'better_assert_difference/exceptions/difference_exception'
 
 module BetterAssertDifference
   DEFAULT_DIFF = 1
-  ACTIVE_RECORD_ENABLED = !!defined?(ActiveRecord::Base)
+  ACTIVE_RECORD_ENABLED = !!defined?(ActiveRecord)
 
   def assert_difference(expression, difference = DEFAULT_DIFF, message = nil, &block)
     expressions = active_record?(expression) ? [expression] : expression
@@ -21,7 +21,7 @@ module BetterAssertDifference
           if exp.respond_to?(:call)
             exp
           elsif ACTIVE_RECORD_ENABLED && active_record?(exp)
-            -> { exp.count }
+            -> { exp.reload.count }
           else
             -> { eval(exp, block.binding) }
           end
@@ -49,8 +49,8 @@ module BetterAssertDifference
 
   private
 
-    def active_record?(expression)
-      expression.respond_to?(:ancestors) &&
-        expression.ancestors.map(&:to_s).include?('ActiveRecord::Base')
-    end
+  def active_record?(expression)
+    expression.respond_to?(:ancestors) &&
+      expression.ancestors.map(&:to_s).include?('ActiveRecord::Base')
+  end
 end
