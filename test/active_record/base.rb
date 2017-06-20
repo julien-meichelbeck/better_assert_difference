@@ -9,6 +9,7 @@ module ActiveRecord
 
     def self.all
       @@items
+      self
     end
 
     def self.count
@@ -19,7 +20,7 @@ module ActiveRecord
       @@items = []
     end
 
-    def self.reload
+    def self.reset
       self
     end
   end
