@@ -21,7 +21,7 @@ module BetterAssertDifference
           if exp.respond_to?(:call)
             exp
           elsif ACTIVE_RECORD_ENABLED && active_record?(exp)
-            -> { exp.reload.count }
+            -> { exp.all.reset.count }
           else
             -> { eval(exp, block.binding) }
           end
