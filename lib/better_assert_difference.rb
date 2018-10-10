@@ -35,7 +35,15 @@ module BetterAssertDifference
     before.zip(after, expression_to_diff) do |before_value, after_value, (exp, diff)|
       next if before_value + diff == after_value
       error = "[#{expression_to_diff.find_index { |expression, _| expression == exp }}] " if expression_to_diff.size > 1
-      error  = "#{error}#{exp.is_a?(Class) ? exp.name : exp.inspect} didn't change by #{diff} {before: #{before_value}, after: #{after_value}}"
+      name =
+        if exp.is_a?(Class)
+          exp.name
+        elsif exp.class.name === 'ActiveRecord::Relation'
+          exp.class.to_s
+        else
+          exp.inspect
+        end
+      error  = "#{error}#{name} didn't change by #{diff} {before: #{before_value}, after: #{after_value}}"
       error  = "#{message}.\n#{error}" if message
       errors << error
     end
