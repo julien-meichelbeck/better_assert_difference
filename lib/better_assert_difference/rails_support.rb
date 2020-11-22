@@ -1,5 +1,5 @@
 require_relative './minitest_support'
 
 module BetterAssertDifference
-  TestFramework = RailsSupport = MinitestSupport
+  RailsSupport = MinitestSupport # This will also set TestFramework to MinitestSupport
 end
