@@ -33,23 +33,27 @@ module BetterAssertDifference
 
     errors = []
     before.zip(after, expression_to_diff) do |before_value, after_value, (exp, diff)|
-      next if before_value + diff == after_value
-      error = "[#{expression_to_diff.find_index { |expression, _| expression == exp }}] " if expression_to_diff.size > 1
-      name =
-        if exp.is_a?(Class)
-          exp.name
-        elsif exp.class.name === 'ActiveRecord::Relation'
-          exp.class.to_s
-        else
-          exp.inspect
-        end
-      error  = "#{error}#{name} didn't change by #{diff} {before: #{before_value}, after: #{after_value}}"
-      error  = "#{message}.\n#{error}" if message
-      errors << error
+      begin
+        BetterAssertDifference::TestFramework.assert_equal(self, before_value + diff, after_value)
+      rescue BetterAssertDifference::TestFramework.exception_kind
+        error = "[#{expression_to_diff.find_index { |expression, _| expression == exp }}] " if expression_to_diff.size > 1
+        name =
+          if exp.is_a?(Class)
+            exp.name
+          elsif exp.class.name === 'ActiveRecord::Relation'
+            exp.class.to_s
+          else
+            exp.inspect
+          end
+        error  = "#{error}#{name} didn't change by #{diff} {before: #{before_value}, after: #{after_value}}"
+        error  = "#{message}.\n#{error}" if message
+        errors << error
+      end
     end
+
     if errors.any?
       errors.unshift "#{errors.size} assertion#{errors.length > 1 ? 's' : ''} failed:"
-      raise MiniTest::Assertion, errors.join("\n")
+      BetterAssertDifference::TestFramework.notify_failure(errors)
     end
 
     retval

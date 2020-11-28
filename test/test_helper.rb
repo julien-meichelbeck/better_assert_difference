@@ -3,6 +3,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'active_record/base'
 require 'dummy/fruit'
 require 'better_assert_difference'
+require 'better_assert_difference/minitest_support'
 require 'pry'
 require 'minitest/autorun'
 
@@ -21,4 +22,5 @@ module BetterAssertDifference::TestHelpers
   end
 end
 
+Minitest::Test.include(BetterAssertDifference)
 Minitest::Test.include(BetterAssertDifference::TestHelpers)

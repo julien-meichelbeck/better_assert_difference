@@ -26,12 +26,15 @@ Include BetterAssertDifference in your tests:
 
 ```ruby
   # For Rails
+  require 'better_assert_difference/rails_support'
   ActiveSupport::TestCase.include BetterAssertDifference
   # For MiniTest
+  require 'better_assert_difference/minitest_support'
   Minitest::Test.include BetterAssertDifference
   # For RSpec
+  require 'better_assert_difference/rspec_support'
   RSpec.configure do |config|
-    config.include AssertDifference
+    config.include BetterAssertDifference
   end
 ```
 
