@@ -2,11 +2,11 @@ module BetterAssertDifference
   class MinitestSupport
     class << self
       def exception_kind
-        MiniTest::Assertion
+        Minitest::Assertion
       end
 
       def notify_failure(errors)
-        raise MiniTest::Assertion, errors.join("\n")
+        raise Minitest::Assertion, errors.join("\n")
       end
 
       def assert_equal(context, computation, expectation)

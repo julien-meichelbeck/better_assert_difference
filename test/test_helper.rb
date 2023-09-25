@@ -8,7 +8,7 @@ require 'pry'
 require 'minitest/autorun'
 
 module BetterAssertDifference::TestHelpers
-  def assert_failure_with_message(expected_message, exception_class = MiniTest::Assertion)
+  def assert_failure_with_message(expected_message, exception_class = Minitest::Assertion)
     begin
       yield
       fail "should fail with message : #{expected_message}"
