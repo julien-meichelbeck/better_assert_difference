@@ -49,7 +49,7 @@ module BetterAssertDifference
     end
     if errors.any?
       errors.unshift "#{errors.size} assertion#{errors.length > 1 ? 's' : ''} failed:"
-      raise MiniTest::Assertion, errors.join("\n")
+      raise Minitest::Assertion, errors.join("\n")
     end
 
     retval
